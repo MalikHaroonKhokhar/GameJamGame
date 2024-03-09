@@ -11,8 +11,9 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame){
-            Instantiate(bulletPrefab,shootingPoint.position,transform.rotation);
+       if(Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
         }
         
     }
