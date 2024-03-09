@@ -7,10 +7,13 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float spreadVirusTimer = 4f;
     private float offsetOfEnemyWithEachOther = 1f;
+        private Rigidbody2D rb;
 
     private float currentTimer = 0f;
 
-
+    void Start(){
+        rb = GetComponent<Rigidbody2D>();
+    }   
     void Update()
     {
         if(currentTimer > spreadVirusTimer)
@@ -28,4 +31,13 @@ public class EnemyScript : MonoBehaviour
         
        
     }
+ 
+    private void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("Organ"))
+        {
+            moveSpeed = 0f;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
 }
