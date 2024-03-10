@@ -6,16 +6,29 @@ public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float spreadVirusTimer = 4f;
+
+    private HealthBar healthBar;
     private float offsetOfEnemyWithEachOther = 1f;
-        private Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     private float currentTimer = 0f;
 
     void Start(){
+        healthBar = GameObject.FindWithTag("HealthBar").GetComponent<HealthBar>();
+
         rb = GetComponent<Rigidbody2D>();
     }   
     void Update()
     {
+        if(transform.position.x < -10)
+        {
+            Destroy(gameObject);
+        }
+
+
+
+
+
         if(currentTimer > spreadVirusTimer)
         {
             Instantiate(gameObject, transform.position + new Vector3(0f, 1f, 0f) * offsetOfEnemyWithEachOther, Quaternion.identity);
@@ -32,12 +45,16 @@ public class EnemyScript : MonoBehaviour
        
     }
  
-    private void OnCollisionEnter2D(Collision2D collision){
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag("Organ"))
         {
+            healthBar.ReduceHealth(1f);
+            spreadVirusTimer = 15f;
+
             moveSpeed = 0f;
             rb.velocity = Vector2.zero;
         }
     }
-
 }
