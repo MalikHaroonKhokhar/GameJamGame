@@ -9,7 +9,12 @@ public class Powers : MonoBehaviour
     public static bool areRedBloodCellsAttacking = false;
     private float powerUpTimer = 4f;
     private float timer = 0f;
+    private ScoreManager scoreManager;
 
+    private void Start()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
 
     private void Update()
     {
@@ -35,8 +40,13 @@ public class Powers : MonoBehaviour
     {
         if (powerUpClicked) return;
 
-        powerUpClicked = true;
-        hasSpreadBullet = true;
+        if(scoreManager.GetCurrentScore() >= 10)
+        {
+            scoreManager.DecreaseScore(10);
+            powerUpClicked = true;
+            hasSpreadBullet = true;
+        }
+       
     }
 
 
@@ -44,8 +54,13 @@ public class Powers : MonoBehaviour
     {
         if (powerUpClicked) return;
 
-        powerUpClicked = true;
-        areRedBloodCellsAttacking = true;
+        if(scoreManager.GetCurrentScore() >= 5)
+        {
+            scoreManager.DecreaseScore(5);
+            powerUpClicked = true;
+            areRedBloodCellsAttacking = true;
+        }
+        
     }
 
 
