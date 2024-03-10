@@ -35,6 +35,10 @@ public class RotationManager : MonoBehaviour
 
                     bulletTimer = 0f;
                 }
+                else if (Powers.areRedBloodCellsAttacking)
+                {
+
+                }
                 else
                 {
                     Instantiate(bulletPrefab, shootpoint.position, transform.rotation);
