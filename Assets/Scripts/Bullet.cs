@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         scoreManager = FindObjectOfType<ScoreManager>();
-        rb.velocity= transform.up * speed;
+        rb.velocity= transform.right * speed;
     }
 
     private void Update()

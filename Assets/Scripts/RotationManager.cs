@@ -30,9 +30,9 @@ public class RotationManager : MonoBehaviour
                 if(Powers.hasSpreadBullet)
                 {
                     Quaternion angle = Quaternion.AngleAxis(-15f, transform.forward); // Adjust the spread angle here
-                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation);
-                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * angle);
-                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * Quaternion.Inverse(angle));
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * Quaternion.Euler(0, 0, 90f));
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * angle * Quaternion.Euler(0, 0, 90f));
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * Quaternion.Inverse(angle) * Quaternion.Euler(0, 0, 90f));
 
                     bulletTimer = 0f;
                 }
@@ -42,7 +42,7 @@ public class RotationManager : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation);
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * Quaternion.Euler(0,0,90f));
                     bulletTimer = 0f;
                 }
                 
@@ -57,12 +57,7 @@ public class RotationManager : MonoBehaviour
 
     private void Animate()
     {
-        float scaleFactor = Mathf.Abs(Mathf.Sin(Time.time) * 1/3f);
-        scaleFactor = Mathf.Clamp(scaleFactor, 0.15f, 1f);
-        if (scaleFactor == 0.15f)
-        {
-            scaleFactor *= -1f; // Reverse the scale factor
-        }
+        float scaleFactor = Mathf.Abs(Mathf.Sin(Time.time)) * 0.125f + 0.15f;
         transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
     }
 
