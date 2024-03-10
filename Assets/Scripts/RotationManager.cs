@@ -26,9 +26,21 @@ public class RotationManager : MonoBehaviour
         
             if(bulletTimer > bulletDelay)
             {
+                if(Powers.hasSpreadBullet)
+                {
+                    Quaternion angle = Quaternion.AngleAxis(-15f, transform.forward); // Adjust the spread angle here
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation);
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * angle);
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation * Quaternion.Inverse(angle));
 
-                Instantiate(bulletPrefab, shootpoint.position, transform.rotation);
-                bulletTimer = 0f;
+                    bulletTimer = 0f;
+                }
+                else
+                {
+                    Instantiate(bulletPrefab, shootpoint.position, transform.rotation);
+                    bulletTimer = 0f;
+                }
+                
             }   
             else
             {
