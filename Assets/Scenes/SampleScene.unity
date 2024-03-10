@@ -2784,6 +2784,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1509406597}
     - target: {fileID: 5342717847162649547, guid: 08bc24c2666d8cc4ba303b4ce6f0a448, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4679810630106233139, guid: 31aa14ec3db14084298c63eff218824a, type: 3}
+    - target: {fileID: 5342717847162649547, guid: 08bc24c2666d8cc4ba303b4ce6f0a448, type: 3}
       propertyPath: redBloodCellsPrefab
       value: 
       objectReference: {fileID: 4445185805773203487, guid: 855952952ed5a8a4dbd8e6e24bdc00bd, type: 3}
