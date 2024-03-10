@@ -21,13 +21,15 @@ public class Bullet : MonoBehaviour
     {
         if (transform.position.x < -10 || transform.position.y < -10 || transform.position.y > 10 || transform.position.x > 10) Destroy(gameObject);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+   
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
             scoreManager.IncreaseScore(scoreValue);
             Destroy(collision.gameObject);
-            Destroy(gameObject);   
+            Destroy(gameObject);
         }
         //if (collision.gameObject.CompareTag("Organ"))
         //{

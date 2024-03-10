@@ -35,14 +35,17 @@ public class EnemyScript : MonoBehaviour
         
        
     }
- 
-    private void OnCollisionEnter2D(Collision2D collision){
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag("Organ"))
         {
             healthBar.ReduceHealth(1f);
             moveSpeed = 0f;
             rb.velocity = Vector2.zero;
         }
+    
     }
+
+       
 
 }
