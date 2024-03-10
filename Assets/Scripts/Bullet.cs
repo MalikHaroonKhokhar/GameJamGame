@@ -12,9 +12,14 @@ public class Bullet : MonoBehaviour
    
     void Start()
     {
-        rb=GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         scoreManager = FindObjectOfType<ScoreManager>();
         rb.velocity= transform.up * speed;
+    }
+
+    private void Update()
+    {
+        if (transform.position.x < -10 || transform.position.y < -10 || transform.position.y > 10 || transform.position.x > 10) Destroy(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,10 +29,10 @@ public class Bullet : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);   
         }
-        if (collision.gameObject.CompareTag("Organ"))
-        {
+        //if (collision.gameObject.CompareTag("Organ"))
+        //{
 
-            Destroy(gameObject);
-        }
+        //    Destroy(gameObject);
+        //}
     }
 }
