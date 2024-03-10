@@ -8,19 +8,21 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float spreadVirusTimer = 4f;
     private float offsetOfEnemyWithEachOther = 1f;
     private HeathBar healthBar;
-        private Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     private float currentTimer = 0f;
+    private bool canSpreadVirus = true;
 
-    void Start(){
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
         healthBar = FindObjectOfType<HeathBar>();
-    }   
+    }
+
     void Update()
     {
-
         if (transform.position.x < -10) Destroy(gameObject);
-        if(currentTimer > spreadVirusTimer)
+        if (canSpreadVirus && currentTimer > spreadVirusTimer)
         {
             Instantiate(gameObject, transform.position + new Vector3(0f, 1f, 0f) * offsetOfEnemyWithEachOther, Quaternion.identity);
             Instantiate(gameObject, transform.position + new Vector3(0f, -1f, 0f) * offsetOfEnemyWithEachOther, Quaternion.identity);
@@ -32,10 +34,9 @@ public class EnemyScript : MonoBehaviour
             currentTimer += Time.deltaTime;
         }
         transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-        
-       
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Organ"))
         {
@@ -43,10 +44,11 @@ public class EnemyScript : MonoBehaviour
             spreadVirusTimer = 20f;
             moveSpeed = 0f;
             rb.velocity = Vector2.zero;
+            canSpreadVirus = false; 
         }
-    
+        else if (collision.gameObject.CompareTag("enemy"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+        }
     }
-
-       
-
 }
