@@ -5,19 +5,32 @@ using UnityEngine;
 public class RotationManager : MonoBehaviour
 {
     public Joystick joystick;
-    public float rotationSpeed = 5f;
+    
 
 
     public GameObject bulletPrefab;
+    public GameObject redBloodCellsPrefab;
+
+
     public Transform shootpoint;
+
+
+
     public float bulletDelay = 2.0f; // Time delay before spawning the bullet
     private float bulletTimer = 0f;
-
+    public float rotationSpeed = 5f;
 
     private void FixedUpdate()
     {
         Animate();
         Vector3 inputDirection = new Vector3(joystick.Horizontal, joystick.Vertical, 0f).normalized;
+
+        if (Powers.areRedBloodCellsAttacking)
+        {
+            Instantiate(redBloodCellsPrefab,  new Vector3(-1.85000002f, 10.2299995f, 0f), Quaternion.identity);
+            Powers.areRedBloodCellsAttacking = false;
+        }
+
 
         if (inputDirection != Vector3.zero)
         {
@@ -36,10 +49,7 @@ public class RotationManager : MonoBehaviour
 
                     bulletTimer = 0f;
                 }
-                else if (Powers.areRedBloodCellsAttacking)
-                {
-                     
-                }
+               
                 else
                 {
                     Instantiate(bulletPrefab, shootpoint.position, transform.rotation * Quaternion.Euler(0,0,90f));
@@ -51,6 +61,8 @@ public class RotationManager : MonoBehaviour
             {
                 bulletTimer += Time.deltaTime;
             }
+
+           
         }
     }
 

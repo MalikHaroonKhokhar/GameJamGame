@@ -13,12 +13,12 @@ public class Powers : MonoBehaviour
 
     private void Update()
     {
+        //for powers associtaed with player
         if(powerUpClicked)
         {
             if(timer > powerUpTimer)
             {
                 hasSpreadBullet = false;
-                areRedBloodCellsAttacking = false;
                 powerUpClicked = false;
                 timer = 0f;
 
