@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private float spawnTimer = 5f;
+    [SerializeField] private float spawnTimer;
     [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private GameObject enemyPrefab;
     private float currentTimer = 0f;

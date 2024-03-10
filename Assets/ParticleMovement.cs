@@ -13,7 +13,7 @@ public class ParticleMovement : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 16; i++)
         {
             // Generate random position within the boundaries of the background
             randomDir = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);

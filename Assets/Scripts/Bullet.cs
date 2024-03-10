@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         {
             scoreManager.IncreaseScore(scoreValue);
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            Destroy(gameObject,0.1f);
         }
         //if (collision.gameObject.CompareTag("Organ"))
         //{
