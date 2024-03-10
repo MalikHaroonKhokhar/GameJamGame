@@ -16,6 +16,7 @@ public class RotationManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Animate();
         Vector3 inputDirection = new Vector3(joystick.Horizontal, joystick.Vertical, 0f).normalized;
 
         if (inputDirection != Vector3.zero)
@@ -37,7 +38,7 @@ public class RotationManager : MonoBehaviour
                 }
                 else if (Powers.areRedBloodCellsAttacking)
                 {
-
+                     
                 }
                 else
                 {
@@ -51,6 +52,18 @@ public class RotationManager : MonoBehaviour
                 bulletTimer += Time.deltaTime;
             }
         }
+    }
+
+
+    private void Animate()
+    {
+        float scaleFactor = Mathf.Abs(Mathf.Sin(Time.time) * 1/3f);
+        scaleFactor = Mathf.Clamp(scaleFactor, 0.15f, 1f);
+        if (scaleFactor == 0.15f)
+        {
+            scaleFactor *= -1f; // Reverse the scale factor
+        }
+        transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
     }
 
 }

@@ -40,6 +40,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Organ"))
         {
             healthBar.ReduceHealth(1f);
+            spreadVirusTimer = 20f;
             moveSpeed = 0f;
             rb.velocity = Vector2.zero;
         }
